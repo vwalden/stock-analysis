@@ -12,9 +12,11 @@ Sub TickerLoop()
         ws.Range("J1").Value = "Yearly Change"
         ws.Range("K1").Value = "Percent Change"
         ws.Range("L1").Value = "Total Stock Volume"
-        ws.Range("N1").Value = "Greatest % Increase"
-        ws.Range("O1").Value = "Greatest % Decrease"
-        ws.Range("P1").Value = "Greatest Total Volume"
+        ws.Range("N2").Value = "Greatest % Increase"
+        ws.Range("N3").Value = "Greatest % Decrease"
+        ws.Range("N4").Value = "Greatest Total Volume"
+        ws.Range("O1").Value = "Ticker"
+        ws.Range("P1").Value = "Value"
         ws.Columns("I:P").AutoFit
         
         ' Initiate values and calcualte last row
@@ -67,13 +69,27 @@ Sub TickerLoop()
         ' Loop through all rows in percent change
         For i = 2 To rg
             ' Find maximum percent change and format
-            ws.Cells(2, 14).Value = WorksheetFunction.Max(ws.Range("K:K"))
-            ws.Cells(2, 14).NumberFormat = "0.00%"
+            ws.Cells(2, 16).Value = WorksheetFunction.Max(ws.Range("K:K"))
+            ws.Cells(2, 16).NumberFormat = "0.00%"
+            ' Insert ticker symbol for maximum percent change
+            If ws.Cells(i, 11).Value = ws.Cells(2, 16) Then
+                ws.Cells(2, 15).Value = ws.Cells(i, 9)
+            End If
             ' Find minimum percent change and format
-            ws.Cells(2, 15).Value = WorksheetFunction.Min(ws.Range("K:K"))
-            ws.Cells(2, 15).NumberFormat = "0.00%"
+            ws.Cells(3, 16).Value = WorksheetFunction.Min(ws.Range("K:K"))
+            ws.Cells(3, 16).NumberFormat = "0.00%"
+            ' Insert ticker symbol for minimum percent change
+            If ws.Cells(i, 11).Value = ws.Cells(3, 16) Then
+                ws.Cells(3, 15).Value = ws.Cells(i, 9)
+            End If
             ' Find maximum total stock volume
-            ws.Cells(2, 16).Value = WorksheetFunction.Max(ws.Range("L:L"))
+            ws.Cells(4, 16).Value = WorksheetFunction.Max(ws.Range("L:L"))
+            ' Insert ticker symbol for minimum percent change
+            If ws.Cells(i, 12).Value = ws.Cells(4, 16) Then
+                ws.Cells(4, 15).Value = ws.Cells(i, 9)
+            End If
+            ' Format column
+            ws.Columns("P:P").AutoFit
         Next i
     Next ws
 
