@@ -1,2 +1,2 @@
 # stock-analysis
-# UCB Data Analytics Bootcamp Modult 2 VBA Scripting Challenge assignment files
+# UCB Data Analytics Bootcamp Module 2 VBA Scripting Challenge assignment files
